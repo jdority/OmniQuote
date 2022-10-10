@@ -16,6 +16,12 @@ global with sharing class SBQuoteSave implements Callable {
         String quoteId=(String)input.get('quoteId');
         
         String quoteJSON = SBQQ.ServiceRouter.read('SBQQ.QuoteAPI.QuoteReader', quoteId);
+        
+        ////
+        //foreach line item - read produdct / add product to quoteModel
+        //return model then save  :-)
+        
+        
         String savedQuote = SBQQ.ServiceRouter.save('SBQQ.QuoteAPI.QuoteSaver', quoteJSON);
         System.debug(savedQuote);
         output.put('result', (map <String, object>) JSON.deserializeUntyped(quoteJSON));
